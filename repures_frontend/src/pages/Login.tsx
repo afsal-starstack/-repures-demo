@@ -8,11 +8,11 @@ import emailIcon from "../assets/icons/loginPage/email.svg";
 import passwordEye from "../assets/icons/loginPage/eye.svg";
 import passwordLock from "../assets/icons/loginPage/lock.svg";
 
-interface LoginProps {
-  className?: string;
-}
+// interface LoginProps {
+//   className?: string;
+// }
 
-export default function Login({ className }: LoginProps) {  // -----------------------------
+export default function Login() {
   // State
   // -----------------------------
   const [email, setEmail] = useState("");
@@ -60,7 +60,7 @@ export default function Login({ className }: LoginProps) {  // -----------------
 
   return (
     <div
-      className={`min-h-[100dvh] w-full relative overflow-hidden flex flex-col items-center justify-start sm:justify-center pt-16 sm:pt-0 px-4 ${className}`}
+      className={`min-h-[100dvh] w-full relative overflow-hidden flex flex-col items-center justify-start sm:justify-center pt-16 sm:pt-0 px-4`}
     >
       {/* Background */}
       <img

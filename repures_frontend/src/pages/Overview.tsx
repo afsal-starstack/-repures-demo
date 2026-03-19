@@ -1,15 +1,34 @@
-import Sidebar from "../componets/layout/Sidebar";
-import Header from "../componets/layout/Header";
+import PlatformCards from "../componets/overview/PlatformCards";
+import TodayFocus from "../componets/overview/TodaysSection";
+import StatsCards from "../componets/overview/StatsCards";
+import ReputationPulse from "../componets/overview/ReputationPulse";
+import EarlySignals from "../componets/overview/EarlySignals";
+import QuickActions from "../componets/overview/QuickActions";
+import AIInsight from "../componets/overview/AIInsight";
+import MarketPosition from "../componets/overview/MarketPosition";
 
-export default function DashboardLayout({ children }: any) {
+export default function Overview() {
   return (
-    <div className="flex bg-[#0B0F17] text-white min-h-screen">
-      <Sidebar />
+    <div className="space-y-6">
+    <p className="text-[#9CA3AF] font-roboto text-[14px] font-normal leading-[20px]">
+    Good morning, Ahmed
+    </p>
+      <PlatformCards />
 
-      <div className="flex-1 flex flex-col">
-        <Header />
-        <main className="p-6 space-y-6">{children}</main>
-      </div>
+      <TodayFocus />
+
+      <StatsCards />
+
+      <ReputationPulse />
+
+      <EarlySignals />
+
+      <QuickActions />
+
+      <AIInsight />
+
+      <MarketPosition />
+
     </div>
   );
 }
