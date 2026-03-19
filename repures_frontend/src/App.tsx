@@ -1,9 +1,17 @@
-export default function App() {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Login  from "./pages/Login"
+import Overview  from "./pages/Overview"
+
+function App() {
   return (
-    <div className="bg-red-500 h-screen">
-      <h1 className="text-white text-3xl p-5">
-        Hello Ananthu
-      </h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/overview" element={<Overview />} />
+      </Routes>
+    </Router>
   );
 }
+
+export default App;

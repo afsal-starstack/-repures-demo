@@ -14,7 +14,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        syne: ['Syne', 'sans-serif'],
+        inter: ["Inter", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 }
