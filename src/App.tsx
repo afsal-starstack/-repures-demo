@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Login from "./pages/Login";
-import DashboardLayout from "./componets/layout/DashboardLayout";
+import Login from "@/pages/Login";
+import DashboardLayout from "@/components/layout/DashboardLayout";
 
-import Overview from "./pages/Overview";
-import Reviews from "./pages/Reviews";
+import Overview from "@/pages/Overview";
+import Reviews from "@/pages/Reviews";
 
 // add more pages here
 

@@ -1,11 +1,11 @@
-import PlatformCards from "../componets/overview/PlatformCards";
-import TodayFocus from "../componets/overview/TodaysSection";
-import StatsCards from "../componets/overview/StatsCards";
-import ReputationPulse from "../componets/overview/ReputationPulse";
-import EarlySignals from "../componets/overview/EarlySignals";
-import QuickActions from "../componets/overview/QuickActions";
-import AIInsight from "../componets/overview/AIInsight";
-import MarketPosition from "../componets/overview/MarketPosition";
+import PlatformCards from "@/components/overview/PlatformCards";
+import TodayFocus from "@/components/overview/TodaysSection";
+import StatsCards from "@/components/overview/StatsCards";
+import ReputationPulse from "@/components/overview/ReputationPulse";
+import EarlySignals from "@/components/overview/EarlySignals";
+import QuickActions from "@/components/overview/QuickActions";
+import AIInsight from "@/components/overview/AIInsight";
+import MarketPosition from "@/components/overview/MarketPosition";
 
 export default function Overview() {
   return (
