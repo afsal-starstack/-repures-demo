@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { ReviewsHeader } from "../componets/reviews/ReviewHeader";
-import { PlatformCards } from "../componets/reviews/platformCards";
-import { FiltersBar } from "../componets/reviews/FilterBar";
-import { ReviewList } from "../componets/reviews/ReviewList";
-import { ReviewDetails } from "../componets/reviews/ReviewDetails";
+import { ReviewsHeader } from "@/components/reviews/ReviewHeader";
+import { PlatformCards } from "@/components/reviews/platformCards";
+import { FiltersBar } from "@/components/reviews/FilterBar";
+import { ReviewList } from "@/components/reviews/ReviewList";
+import { ReviewDetails } from "@/components/reviews/ReviewDetails";
 
 const Reviews = () => {
   const [selectedReviewIndex, setSelectedReviewIndex] = useState(0);

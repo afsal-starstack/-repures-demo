@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import bgImage from "../assets/images/loginPage/background.png";
+import bgImage from "@/assets/images/loginPage/background.png";
 
-import logo from "../assets/icons/loginPage/logo.svg";
-import emailIcon from "../assets/icons/loginPage/email.svg";
-import passwordEye from "../assets/icons/loginPage/eye.svg";
-import passwordLock from "../assets/icons/loginPage/lock.svg";
+import logo from "@/assets/icons/loginPage/logo.svg";
+import emailIcon from "@/assets/icons/loginPage/email.svg";
+import passwordEye from "@/assets/icons/loginPage/eye.svg";
+import passwordLock from "@/assets/icons/loginPage/lock.svg";
 
 // interface LoginProps {
 //   className?: string;
