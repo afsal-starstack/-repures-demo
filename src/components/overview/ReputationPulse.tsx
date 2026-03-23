@@ -1,29 +1,60 @@
 // components/overview/ReputationPulse.tsx
 
 import { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from "recharts";
 import { LineChart as LineIcon, Smile, BarChart3 } from "lucide-react";
 
 const reputationData = [
-  { name: "Week 1", value: 85 },
-  { name: "Week 2", value: 84 },
-  { name: "Week 3", value: 86 },
-  { name: "Week 4", value: 87 },
+  { week: "Week 1", score: 85 },
+  { week: "Week 2", score: 84 },
+  { week: "Week 3", score: 86 },
+  { week: "Week 4", score: 87 },
 ];
 
 const sentimentData = [
-  { name: "Week 1", value: 72 },
-  { name: "Week 2", value: 70 },
-  { name: "Week 3", value: 75 },
-  { name: "Week 4", value: 74 },
+  { week: "Week 1", sentiment: 72 },
+  { week: "Week 2", sentiment: 70 },
+  { week: "Week 3", sentiment: 75 },
+  { week: "Week 4", sentiment: 74 },
 ];
 
 const volumeData = [
-  { name: "Week 1", value: 45 },
-  { name: "Week 2", value: 52 },
-  { name: "Week 3", value: 48 },
-  { name: "Week 4", value: 56 },
+  { week: "Week 1", volume: 45 },
+  { week: "Week 2", volume: 52 },
+  { week: "Week 3", volume: 48 },
+  { week: "Week 4", volume: 56 },
 ];
+
+const tooltipBoxStyle = {
+  backgroundColor: "#111827",
+  border: "1px solid #1F2937",
+  borderRadius: "8px",
+  width: 100,       // Tooltip width
+  height: 60,       // Tooltip height
+  padding: "10px",
+  overflow: "hidden",
+};
+
+const labelTextStyle = {
+  color: "#9CA3AF",
+  fontSize: "12px",
+  whiteSpace: "nowrap",
+};
+
+const valueTextStyle = {
+  color: "#14B8A6",
+  fontSize: "12px",
+  whiteSpace: "nowrap",
+};
 
 export default function ReputationPulse() {
   const [active, setActive] = useState("reputation");
@@ -87,19 +118,25 @@ export default function ReputationPulse() {
       {/* CHART */}
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
-          
+
           {/* REPUTATION */}
           {active === "reputation" && (
             <LineChart data={reputationData}>
-              <XAxis dataKey="name" stroke="#6B7280" />
+              <XAxis dataKey="week" stroke="#6B7280" />
               <YAxis stroke="#6B7280" />
-              <Tooltip />
+              <Tooltip
+                contentStyle={tooltipBoxStyle}
+                cursor={{ stroke: "#1F2937" }}
+                labelStyle={labelTextStyle}
+                itemStyle={valueTextStyle}
+              />
               <Line
                 type="monotone"
-                dataKey="value"
+                dataKey="score"
                 stroke="#14B8A6"
                 strokeWidth={3}
-                dot={{ r: 5 }}
+                dot={{ r: 4, fill: "#14B8A6", stroke: "#14B8A6" }}
+                activeDot={{ r: 5, fill: "#14B8A6", stroke: "#14B8A6" }}
               />
             </LineChart>
           )}
@@ -107,15 +144,21 @@ export default function ReputationPulse() {
           {/* SENTIMENT */}
           {active === "sentiment" && (
             <LineChart data={sentimentData}>
-              <XAxis dataKey="name" stroke="#6B7280" />
+              <XAxis dataKey="week" stroke="#6B7280" />
               <YAxis stroke="#6B7280" />
-              <Tooltip />
+              <Tooltip
+                contentStyle={tooltipBoxStyle}
+                cursor={{ stroke: "#1F2937" }}
+                labelStyle={labelTextStyle}
+                itemStyle={valueTextStyle}
+              />
               <Line
                 type="monotone"
-                dataKey="value"
+                dataKey="sentiment"
                 stroke="#6366F1"
                 strokeWidth={3}
-                dot={{ r: 5 }}
+                dot={{ r: 4, fill: "#6366F1", stroke: "#6366F1" }}
+                activeDot={{ r: 5, fill: "#6366F1", stroke: "#6366F1" }}
               />
             </LineChart>
           )}
@@ -123,10 +166,19 @@ export default function ReputationPulse() {
           {/* VOLUME */}
           {active === "volume" && (
             <BarChart data={volumeData}>
-              <XAxis dataKey="name" stroke="#6B7280" />
+              <XAxis dataKey="week" stroke="#6B7280" />
               <YAxis stroke="#6B7280" />
-              <Tooltip />
-              <Bar dataKey="value" fill="#14B8A6" radius={[6, 6, 0, 0]} />
+              <Tooltip
+                contentStyle={tooltipBoxStyle}
+                cursor={{ fill: "transparent" }}
+                labelStyle={labelTextStyle}
+                itemStyle={valueTextStyle}
+              />
+              <Bar
+                dataKey="volume"
+                fill="#14B8A6"
+                radius={[6, 6, 0, 0]}
+              />
             </BarChart>
           )}
 
@@ -135,184 +187,3 @@ export default function ReputationPulse() {
     </div>
   );
 }
-
-// import { useState } from "react";
-// import {
-//   LineChart,
-//   Line,
-//   XAxis,
-//   YAxis,
-//   Tooltip,
-//   ResponsiveContainer,
-//   CartesianGrid,
-//   BarChart,
-//   Bar,
-// } from "recharts";
-
-// import { LineChart as LineIcon, Smile, BarChart3 } from "lucide-react";
-
-// // ------------------
-// // Dummy Data
-// // ------------------
-// const scoreData = [
-//   { name: "Week 1", value: 85 },
-//   { name: "Week 2", value: 84 },
-//   { name: "Week 3", value: 86 },
-//   { name: "Week 4", value: 88 },
-// ];
-
-// const sentimentData = [
-//   { name: "Week 1", value: 72 },
-//   { name: "Week 2", value: 70 },
-//   { name: "Week 3", value: 75 },
-//   { name: "Week 4", value: 74 },
-// ];
-
-// const volumeData = [
-//   { name: "Week 1", value: 45 },
-//   { name: "Week 2", value: 52 },
-//   { name: "Week 3", value: 48 },
-//   { name: "Week 4", value: 56 },
-// ];
-
-// // ------------------
-// // Custom Tooltip
-// // ------------------
-// const CustomTooltip = ({ active, payload, label, type }: any) => {
-//   if (active && payload && payload.length) {
-//     const value = payload[0].value;
-
-//     return (
-//       <div className="bg-[#0B0F14] border border-white/10 px-3 py-2 rounded-lg shadow-lg">
-//         <p className="text-xs text-gray-400">{label}</p>
-//         <p className="text-sm text-teal-400 font-medium">
-//           {type === "score" && `score : ${value}`}
-//           {type === "sentiment" && `Sentiment : ${value}`}
-//           {type === "volume" && `Volume : ${value}`}
-//         </p>
-//       </div>
-//     );
-//   }
-//   return null;
-// };
-
-// // ------------------
-// // Component
-// // ------------------
-// export default function ReputationPulse() {
-//   const [activeTab, setActiveTab] = useState("score");
-
-//   return (
-//     <div className="rounded-2xl border border-white/10 p-6 bg-[rgba(13,16,23,0.30)] backdrop-blur-xl">
-
-//       {/* Header */}
-//       <div className="flex items-center justify-between mb-6">
-//         <div>
-//           <h2 className="text-white text-lg font-semibold">
-//             Reputation Pulse
-//           </h2>
-//           <p className="text-gray-400 text-sm">
-//             Last 30 days · Updated 18 hours ago
-//           </p>
-//         </div>
-
-//         {/* Tabs */}
-//         <div className="flex bg-[#0B0F14] p-1 rounded-xl border border-white/10">
-//           <button
-//             onClick={() => setActiveTab("score")}
-//             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm ${
-//               activeTab === "score"
-//                 ? "bg-teal-500/20 text-teal-400"
-//                 : "text-gray-400"
-//             }`}
-//           >
-//             <LineIcon size={16} /> Reputation Score
-//           </button>
-
-//           <button
-//             onClick={() => setActiveTab("sentiment")}
-//             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm ${
-//               activeTab === "sentiment"
-//                 ? "bg-indigo-500/20 text-indigo-400"
-//                 : "text-gray-400"
-//             }`}
-//           >
-//             <Smile size={16} /> Sentiment Trend
-//           </button>
-
-//           <button
-//             onClick={() => setActiveTab("volume")}
-//             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm ${
-//               activeTab === "volume"
-//                 ? "bg-teal-500/20 text-teal-400"
-//                 : "text-gray-400"
-//             }`}
-//           >
-//             <BarChart3 size={16} /> Review Volume
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Graph */}
-//       <div className="w-full h-[300px]">
-//         <ResponsiveContainer width="100%" height="100%">
-
-//           {/* SCORE */}
-//           {activeTab === "score" && (
-//             <LineChart data={scoreData}>
-//               <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" />
-//               <XAxis dataKey="name" stroke="#6B7280" />
-//               <YAxis stroke="#6B7280" />
-//               <Tooltip
-//                 content={<CustomTooltip type="score" />}
-//                 cursor={{ stroke: "#374151", strokeWidth: 1 }}
-//               />
-//               <Line
-//                 type="monotone"
-//                 dataKey="value"
-//                 stroke="#14B8A6"
-//                 strokeWidth={2}
-//                 dot={{ r: 4 }}
-//               />
-//             </LineChart>
-//           )}
-
-//           {/* SENTIMENT */}
-//           {activeTab === "sentiment" && (
-//             <LineChart data={sentimentData}>
-//               <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" />
-//               <XAxis dataKey="name" stroke="#6B7280" />
-//               <YAxis stroke="#6B7280" />
-//               <Tooltip
-//                 content={<CustomTooltip type="sentiment" />}
-//                 cursor={{ stroke: "#374151", strokeWidth: 1 }}
-//               />
-//               <Line
-//                 type="monotone"
-//                 dataKey="value"
-//                 stroke="#6366F1"
-//                 strokeWidth={2}
-//                 dot={{ r: 4 }}
-//               />
-//             </LineChart>
-//           )}
-
-//           {/* VOLUME */}
-//           {activeTab === "volume" && (
-//             <BarChart data={volumeData}>
-//               <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" />
-//               <XAxis dataKey="name" stroke="#6B7280" />
-//               <YAxis stroke="#6B7280" />
-//               <Tooltip
-//                 content={<CustomTooltip type="volume" />}
-//                 cursor={{ fill: "rgba(255,255,255,0.02)" }}
-//               />
-//               <Bar dataKey="value" fill="#14B8A6" radius={[6, 6, 0, 0]} />
-//             </BarChart>
-//           )}
-
-//         </ResponsiveContainer>
-//       </div>
-//     </div>
-//   );
-// }

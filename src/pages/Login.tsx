@@ -51,7 +51,7 @@ export default function Login() {
     if (email === dummyEmail && password === dummyPassword) {
       setError("");
       setEmailError("");
-       // ✅ redirect to dashboard
+      // ✅ redirect to dashboard
       navigate("/overview", { replace: true });
     } else {
       setError("Email or password is wrong");
@@ -71,7 +71,6 @@ export default function Login() {
 
       {/* Content Wrapper */}
       <div className="relative z-10 w-full max-w-[450px] flex flex-col items-center">
-
         {/* Logo */}
         <div className="mb-6 sm:mb-8 flex items-center gap-3">
           <div className="border border-teal-500/30 rounded-lg w-10 h-10 flex items-center justify-center overflow-hidden">
@@ -93,7 +92,7 @@ export default function Login() {
         >
           {/* Inner Glass */}
           <div className="p-[33px] sm:p-[33px] rounded-2xl min-h-[420px] sm:min-h-[480px] w-full bg-[#163C34] backdrop-blur-xl">
-          {/* <div className="p-[33px] sm:p-[33px] rounded-2xl min-h-[420px] sm:min-h-[480px] w-full bg-[#000000] backdrop-blur-xl"> */}
+            {/* <div className="p-[33px] sm:p-[33px] rounded-2xl min-h-[420px] sm:min-h-[480px] w-full bg-[#000000] backdrop-blur-xl"> */}
 
             {/* Heading */}
             <div className="pb-[18px]">
@@ -113,10 +112,11 @@ export default function Login() {
 
               <div
                 className={`mt-1 flex items-center w-[379px] h-[42px] px-[13px] py-[9px] gap-[9px] rounded-lg bg-white/5 border 
-                ${emailError
+                ${
+                  emailError
                     ? "border-red-500"
                     : "border-[rgba(255,255,255,0.08)]"
-                  } focus-within:border-teal-400/50`}
+                } focus-within:border-teal-400/50`}
               >
                 <img src={emailIcon} className="w-4 " />
 
@@ -137,9 +137,7 @@ export default function Login() {
               </div>
 
               {emailError && (
-                <p className="text-red-400 text-xs mt-1">
-                  {emailError}
-                </p>
+                <p className="text-red-400 text-xs mt-1">{emailError}</p>
               )}
             </div>
 
@@ -149,14 +147,10 @@ export default function Login() {
                 <label className="text-[#9CA3AF] text-[12px] leading-[16px] font-medium font-roboto">
                   Password
                 </label>
-                <span className="text-teal-400 cursor-pointer">
-                  Forgot?
-                </span>
+                <span className="text-teal-400 cursor-pointer">Forgot?</span>
               </div>
 
-              <div
-   className="mt-1 flex items-center w-[379px] h-[42px] px-[13px] py-[9px] gap-[9px] rounded-lg bg-white/5 border border-[rgba(255,255,255,0.08)] focus-within:border-teal-400/50"
-              >
+              <div className="mt-1 flex items-center w-[379px] h-[42px] px-[13px] py-[9px] gap-[9px] rounded-lg bg-white/5 border border-[rgba(255,255,255,0.08)] focus-within:border-teal-400/50">
                 <img src={passwordLock} className="w-4" />
 
                 <input
@@ -178,11 +172,7 @@ export default function Login() {
                 />
               </div>
 
-              {error && (
-                <p className="text-red-500 text-xs mt-2">
-                  {error}
-                </p>
-              )}
+              {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
             </div>
 
             {/* Button */}
@@ -190,28 +180,24 @@ export default function Login() {
               onClick={handleLogin}
               disabled={!isReady}
               className={`flex justify-center  items-center gap-[8px] w-[382px] h-[40px] py-[10px] mt-[32px] rounded-lg 
-  text-[#FFF] text-[14px] leading-[20px] font-semibold font-roboto text-center transition
-  ${isReady
-                  ? "bg-teal-500 hover:bg-teal-600"
-                  : "bg-[#555F5E] cursor-not-allowed"
-                }`}
+                        text-[#FFF] text-[14px] leading-[20px] font-semibold font-roboto text-center transition
+                        ${
+                          isReady
+                            ? "bg-teal-500 hover:bg-teal-600"
+                            : "bg-[#555F5E] cursor-not-allowed"
+                        }`}
             >
               Sign In
             </button>
 
             {/* Footer */}
             <div className="pt-6 flex justify-center text-xs flex-wrap text-center">
-              <span className="text-gray-500 mr-1">
-                Don't have an account?
-              </span>
-              <span className="text-teal-400 cursor-pointer">
-                Create one
-              </span>
+              <span className="text-gray-500 mr-1">Don't have an account?</span>
+              <span className="text-teal-400 cursor-pointer">Create one</span>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
