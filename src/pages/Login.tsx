@@ -40,8 +40,8 @@ export default function Login() {
     // const dummyEmail = "repures@gmail.com";
     // const dummyPassword = "123456";
 
-    const dummyEmail = "a@gmail.com";
-    const dummyPassword = "a";
+    const dummyEmail = "repures@gmail.com";
+    const dummyPassword = "repures@123";
 
     if (!validateEmail(email)) {
       setEmailError("Enter a valid email address");
