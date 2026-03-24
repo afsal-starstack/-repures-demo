@@ -114,10 +114,14 @@ code {
 
 @import "tailwindcss";
 
-@theme {
+/* @theme {
   --font-roboto: "Roboto", sans-serif;
   --font-syne: "Syne", sans-serif;
   --font-inter: "Inter", sans-serif;
+} */
+
+@theme {
+  --font-sans: "Roboto", sans-serif;
 }
 
 
