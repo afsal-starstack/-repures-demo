@@ -9,7 +9,7 @@ import MarketPosition from "@/components/overview/MarketPosition";
 
 export default function Overview() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 mt-[115px]">
     <p className="text-[#9CA3AF] font-roboto text-[14px] font-normal leading-[20px]">
     Good morning, Ahmed
     </p>

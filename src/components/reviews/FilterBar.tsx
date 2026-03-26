@@ -7,7 +7,7 @@ import {
   Globe,
   X,
 } from "lucide-react";
-import { useClickOutside } from "../../hooks/useClickOutside";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 type Filters = {
   platform: string;
@@ -105,7 +105,7 @@ export const FiltersBar: React.FC<Props> = ({
                       updateFilter("platform", item);
                       setOpenPlatform(false);
                     }}
-                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(20,184,166,1)] hover:rounded-md"
+                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(13,148,136,1)] hover:rounded-md"
                   >
                     {item}
                   </div>
@@ -188,7 +188,7 @@ export const FiltersBar: React.FC<Props> = ({
                       updateFilter("language", item);
                       setOpenLanguage(false);
                     }}
-                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(20,184,166,1)] hover:rounded-md"
+                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(13,148,136,1)] hover:rounded-md"
                   >
                     {item}
                   </div>
@@ -245,7 +245,7 @@ export const FiltersBar: React.FC<Props> = ({
                       updateFilter("date", item);
                       setOpenDate(false);
                     }}
-                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(20,184,166,1)] hover:rounded-md"
+                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(13,148,136,1)] hover:rounded-md"
                   >
                     {item}
                   </div>
