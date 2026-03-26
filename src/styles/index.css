@@ -120,6 +120,10 @@ code {
   --font-inter: "Inter", sans-serif;
 }
 
+/* @theme {
+  --font-sans: "Roboto", sans-serif;
+} */
+
 
 /* Custom Animations */
 /* @layer utilities {

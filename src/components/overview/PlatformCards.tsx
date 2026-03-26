@@ -35,7 +35,7 @@ const platforms = [
 
 export default function PlatformCards() {
   return (
-    <div className=" h-[339px] p-[25px] rounded-[12px] border border-[#0D1017] bg-[#0D1117]">
+    <div className=" h-[339px] p-[25px] rounded-[12px] border border-[rgba(255,255,255,0.07)] bg-[#0D1117]">
       {/* TODAY STATUS TITLE */}
       <p className="text-[#6B7280] text-[14px] font-roboto font-medium leading-[20px] tracking-[1.4px] align-middle mb-3">
         Today&apos;s Reputation Status
@@ -71,8 +71,8 @@ export default function PlatformCards() {
         {platforms.map((item, index) => (
           <div
             key={index}
-            className="rounded-xl border border-[#1F2937] bg-[#1d232e] p-5 h-[152px] w-full 
-          hover:bg-[#232938] hover:border-[#374151] transition-all duration-200 cursor-pointer"
+            className="rounded-xl border border-[#1F2937] bg-[rgba(255,255,255,0.04)] p-5 h-[152px] w-full 
+          hover:bg-[rgba(255,255,255,.15)] hover:border-[#374151] transition-all duration-200 cursor-pointer"
           >
             {/* HEADER */}
             <div className="flex items-center gap-3 mb-[16px]">

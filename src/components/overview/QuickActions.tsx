@@ -1,82 +1,109 @@
-import { MessageCircle, Clock, ThumbsDown, BarChart2 } from "lucide-react";
+import MessageCircle from "@/assets/icons/overview/reviewIcon.svg";
+import Clock from "@/assets/icons/overview/clockIcon.svg";
+import ThumbsDown from "@/assets/icons/overview/dislikeIcon.svg";
+import BarChart from "@/assets/icons/overview/buildingIcon.svg";
 
 const actions = [
   {
     title: "Unanswered Reviews",
     value: "6",
-    icon: MessageCircle,
-    border: "border-orange-500/40",
+    image: MessageCircle,
+    border: "border-[rgba(249,115,22,0.25)]",
     hover: "hover:bg-orange-500/10",
-    color: "text-orange-400",
+    color: "text-[rgba(251,146,60,1)]",
+    bg: "bg-[rgba(249,115,22,0.10)]",
   },
   {
     title: "Avg Response Time",
     value: "4.2 hrs",
-    icon: Clock,
-    border: "border-teal-500/40",
-    hover:
-      "hover:bg-gradient-to-r hover:from-teal-500/20 hover:to-transparent",
-    color: "text-teal-400",
+    image: Clock,
+    border: "border-[rgba(20,184,166,0.25)]",
+    hover: "hover:bg-blue-500/10",
+    color: "text-[rgba(45,212,191,1)]",
+    bg: "bg-[rgba(20,184,166,0.10)]",
   },
   {
     title: "New Negative Reviews",
     value: "3",
-    icon: ThumbsDown,
-    border: "border-red-500/40",
+    image: ThumbsDown,
+    border: "border-[rgba(239,68,68,0.25)]",
     hover: "hover:bg-red-500/10",
-    color: "text-red-400",
+    color: "text-[rgba(248,113,113,1)]",
+    bg: "bg-[rgba(239,68,68,0.10)]",
   },
   {
     title: "Competitor Mentions",
     value: "11",
-    icon: BarChart2,
-    border: "border-indigo-500/40",
-    hover: "hover:bg-indigo-500/10",
-    color: "text-indigo-400",
+    image: BarChart,
+    border: "border-[rgba(99,102,241,0.25)]",
+    hover: "hover:bg-[rgba(129,140,248,0.15)]",
+    color: "text-[rgba(129,140,248,1)]",
+    bg: "bg-[rgba(129,140,248,0.10)]",
   },
 ];
 
+const ArrowIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="15"
+    height="14"
+    viewBox="0 0 15 14"
+    fill="none"
+  >
+    <path
+      d="M9.6329 5.48339L4.60636 10.5117L3.77832 9.68339L8.80486 4.65505H4.38477V3.48839H10.7991V9.90505H9.6329V5.48339Z"
+      fill="#4B5563"
+    />
+  </svg>
+);
+
 export default function QuickActions() {
   return (
-    <div className="p-6 rounded-2xl border border-white/10 bg-[#0B1117]">
+    <div>
       {/* Header */}
-      <h2 className="text-lg font-semibold mb-6">Quick Actions</h2>
+      <h2 className="text-white font-roboto text-[18px] font-semibold leading-[28px] mb-4">
+        Quick Actions
+      </h2>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {actions.map((item, index) => {
-          const Icon = item.icon;
-
-          return (
-            <div
-              key={index}
-              className={`
-                relative p-5 rounded-xl border ${item.border}
-                bg-[#0E1621]
-                transition-colors duration-300
-                ${item.hover}
-              `}
-            >
-              {/* Top Right Arrow */}
-              <div className="absolute top-4 right-4 text-gray-500 text-sm">
-                ↗
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {actions.map((item, index) => (
+          <div
+            key={index}
+            className={`
+              relative flex flex-col items-start flex-shrink-0
+              w-[284px] h-[153px] p-[21px]
+              rounded-[12px] border ${item.border}
+              bg-[rgba(19,22,28,0.3)]
+              transition-colors duration-300 cursor-pointer
+              ${item.hover} hover:shadow-lg
+            `}
+          >
+            {/* Icon + Arrow Row */}
+            <div className="flex items-center justify-between w-full mb-4">
+              <div
+                className={`w-9 h-9 flex items-center justify-center rounded-lg ${item.bg}`}
+              >
+                <img src={item.image} alt={item.title} className="w-5 h-5" />
               </div>
-
-              {/* Icon */}
-              <div className="mb-4 w-10 h-10 flex items-center justify-center rounded-lg bg-white/5">
-                <Icon className={`w-5 h-5 ${item.color}`} />
+              <div className="pb-4">
+                <ArrowIcon />
               </div>
-
-              {/* Title */}
-              <p className="text-sm text-gray-400 mb-2">{item.title}</p>
-
-              {/* Value */}
-              <p className={`text-2xl font-semibold ${item.color}`}>
-                {item.value}
-              </p>
             </div>
-          );
-        })}
+
+            {/* Title */}
+            <p className="text-[12px] font-medium leading-[15px] text-[#6B7280] font-roboto mb-2">
+              {item.title}
+            </p>
+
+            {/* Value */}
+            <p
+              className={`text-[30px] font-bold leading-[36px] font-inter ${item.color}`}
+            >
+              {item.value}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

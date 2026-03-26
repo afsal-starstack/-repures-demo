@@ -1,5 +1,3 @@
-// components/overview/ReputationPulse.tsx
-
 import { useState } from "react";
 import {
   LineChart,
@@ -10,6 +8,7 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
+  CartesianGrid,
 } from "recharts";
 import { LineChart as LineIcon, Smile, BarChart3 } from "lucide-react";
 
@@ -38,8 +37,8 @@ const tooltipBoxStyle = {
   backgroundColor: "#111827",
   border: "1px solid #1F2937",
   borderRadius: "8px",
-  width: 100,       // Tooltip width
-  height: 60,       // Tooltip height
+  width: 100,
+  height: 60,
   padding: "10px",
   overflow: "hidden",
 };
@@ -59,29 +58,56 @@ const valueTextStyle = {
 export default function ReputationPulse() {
   const [active, setActive] = useState("reputation");
 
+  const yAxisLabelStyle = {
+    fill: "#9CA3AF",
+    fontFamily: "Inter",
+    fontSize: 12,
+    fontWeight: 700,
+    fontStyle: "normal",
+    lineHeight: "normal",
+  };
+
+  const yAxisTickStyle = {
+    fill: "#6B7280",
+    fontFamily: "Inter",
+    fontSize: 12,
+    fontWeight: 400,
+    fontStyle: "normal",
+    lineHeight: "normal",
+  };
+
+  const xAxisTickStyle = {
+    fill: "#6B7280",
+    fontFamily: "Inter",
+    fontSize: 12,
+    fontWeight: 400,
+    fontStyle: "normal",
+    lineHeight: "normal",
+  };
+
+  const tickLineStyle = { stroke: "#6B7280", strokeWidth: 1 };
+
   return (
-    <div className="rounded-2xl border border-[#1F2937] bg-[#0D1117] p-6">
-      
+    <div className="rounded-2xl border border-[#1F2937] bg-[rgba(19, 22, 28, 0.3)] p-6 h-[450px]">
       {/* HEADER */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-white text-[16px] font-semibold">
+          <h3 className="text-[#FFFFFF] font-roboto text-[18px] font-semibold leading-[28px]">
             Reputation Pulse
           </h3>
-          <p className="text-[#6B7280] text-[12px] mt-1">
+          <p className="text-[#6B7280] font-roboto text-[12px] font-normal leading-[16px] mt-1">
             Last 30 days · Updated 18 hours ago
           </p>
         </div>
 
         {/* TABS */}
-        <div className="flex items-center bg-[#0B0F14] border border-[#1F2937] rounded-xl p-1">
-          
+        <div className="flex items-center w-[527.359px] h-[56px] p-[5px] gap-[4px] flex-shrink-0 rounded-[12px] bg-[#0A0D12] border border-[#1F2937]">
           <button
             onClick={() => setActive("reputation")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] ${
+            className={`flex items-center w-[170px] h-[46px] px-[21px] py-[11px] gap-[8px] flex-shrink-0 rounded-[8px] shadow-sm text-[13px] border ${
               active === "reputation"
-                ? "bg-teal-500/20 text-teal-400"
-                : "text-[#6B7280]"
+                ? "border-[rgba(20,184,166,0.4)] bg-[rgba(20,184,166,0.2)] text-teal-400"
+                : "border-transparent bg-transparent text-[#6B7280]"
             }`}
           >
             <LineIcon className="w-4 h-4" />
@@ -90,10 +116,10 @@ export default function ReputationPulse() {
 
           <button
             onClick={() => setActive("sentiment")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] ${
+            className={`flex items-center w-[163px] h-[46px] px-[21px] py-[11px] gap-[8px] flex-shrink-0 rounded-[8px] shadow-sm text-[13px] border ${
               active === "sentiment"
-                ? "bg-indigo-500/20 text-indigo-400"
-                : "text-[#6B7280]"
+                ? "border-[rgba(20,184,166,0.4)] bg-[rgba(20,184,166,0.2)] text-indigo-400"
+                : "border-transparent bg-transparent text-[#6B7280]"
             }`}
           >
             <Smile className="w-4 h-4" />
@@ -102,28 +128,50 @@ export default function ReputationPulse() {
 
           <button
             onClick={() => setActive("volume")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] ${
+            className={`flex items-center w-[175.188px] h-[46px] px-[21px] py-[11px] gap-[8px] flex-shrink-0 rounded-[8px] shadow-sm text-[13px] border ${
               active === "volume"
-                ? "bg-teal-500/20 text-teal-400"
-                : "text-[#6B7280]"
+                ? "border-[rgba(20,184,166,0.4)] bg-[rgba(20,184,166,0.2)] text-teal-400"
+                : "border-transparent bg-transparent text-[#6B7280]"
             }`}
           >
             <BarChart3 className="w-4 h-4" />
             Review Volume
           </button>
-
         </div>
       </div>
 
       {/* CHART */}
-      <div className="h-[300px]">
+      <div className="h-[320px]">
         <ResponsiveContainer width="100%" height="100%">
-
           {/* REPUTATION */}
           {active === "reputation" && (
             <LineChart data={reputationData}>
-              <XAxis dataKey="week" stroke="#6B7280" />
-              <YAxis stroke="#6B7280" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                strokeOpacity={0.3}
+                stroke="#374151"
+                vertical={false}
+              />
+              <XAxis
+                dataKey="week"
+                stroke="#6B7280"
+                tick={xAxisTickStyle}
+                tickLine={tickLineStyle}
+                tickSize={6}
+              />
+              <YAxis
+                stroke="#6B7280"
+                tick={yAxisTickStyle}
+                tickLine={tickLineStyle}
+                tickSize={6}
+                label={{
+                  value: "Score",
+                  angle: -90,
+                  position: "insideLeft",
+                  offset: 10,
+                  style: yAxisLabelStyle,
+                }}
+              />
               <Tooltip
                 contentStyle={tooltipBoxStyle}
                 cursor={{ stroke: "#1F2937" }}
@@ -144,8 +192,32 @@ export default function ReputationPulse() {
           {/* SENTIMENT */}
           {active === "sentiment" && (
             <LineChart data={sentimentData}>
-              <XAxis dataKey="week" stroke="#6B7280" />
-              <YAxis stroke="#6B7280" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                strokeOpacity={0.3}
+                stroke="#374151"
+                vertical={false}
+              />
+              <XAxis
+                dataKey="week"
+                stroke="#6B7280"
+                tick={xAxisTickStyle}
+                tickLine={tickLineStyle}
+                tickSize={6}
+              />
+              <YAxis
+                stroke="#6B7280"
+                tick={yAxisTickStyle}
+                tickLine={tickLineStyle}
+                tickSize={6}
+                label={{
+                  value: "Positive",
+                  angle: -90,
+                  position: "insideLeft",
+                  offset: 10,
+                  style: yAxisLabelStyle,
+                }}
+              />
               <Tooltip
                 contentStyle={tooltipBoxStyle}
                 cursor={{ stroke: "#1F2937" }}
@@ -166,22 +238,41 @@ export default function ReputationPulse() {
           {/* VOLUME */}
           {active === "volume" && (
             <BarChart data={volumeData}>
-              <XAxis dataKey="week" stroke="#6B7280" />
-              <YAxis stroke="#6B7280" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                strokeOpacity={0.3}
+                stroke="#374151"
+                vertical={false}
+              />
+              <XAxis
+                dataKey="week"
+                stroke="#6B7280"
+                tick={xAxisTickStyle}
+                tickLine={tickLineStyle}
+                tickSize={6}
+              />
+              <YAxis
+                stroke="#6B7280"
+                tick={yAxisTickStyle}
+                tickLine={tickLineStyle}
+                tickSize={6}
+                label={{
+                  value: "Reviews",
+                  angle: -90,
+                  position: "insideLeft",
+                  offset: 10,
+                  style: yAxisLabelStyle,
+                }}
+              />
               <Tooltip
                 contentStyle={tooltipBoxStyle}
                 cursor={{ fill: "transparent" }}
                 labelStyle={labelTextStyle}
                 itemStyle={valueTextStyle}
               />
-              <Bar
-                dataKey="volume"
-                fill="#14B8A6"
-                radius={[6, 6, 0, 0]}
-              />
+              <Bar dataKey="volume" fill="#10B981" radius={[6, 6, 0, 0]} />
             </BarChart>
           )}
-
         </ResponsiveContainer>
       </div>
     </div>

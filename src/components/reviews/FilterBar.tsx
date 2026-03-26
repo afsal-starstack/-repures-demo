@@ -7,7 +7,7 @@ import {
   Globe,
   X,
 } from "lucide-react";
-import { useClickOutside } from "../../hooks/useClickOutside";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 type Filters = {
   platform: string;
@@ -52,7 +52,8 @@ export const FiltersBar: React.FC<Props> = ({
   const languages = ["English", "Arabic", "Japanese", "Chinese", "Russian"];
   const dates = ["Last 30 days", "Last 7 days", "Month", "Year"];
 
-  // Dynamic chip config
+
+    // Filter chips config
   const chipConfig = [
     { key: "platform", value: platform, defaultValue: "Platform" },
     {
@@ -69,10 +70,12 @@ export const FiltersBar: React.FC<Props> = ({
   ];
 
   return (
-    <div className="mt-6 p-[1px] rounded-2xl bg-gradient-to-r from-white/10 via-transparent to-white/10">
-      <div className="rounded-2xl bg-[#0B0F19]/90 p-4 space-y-4">
+    <div className="mt-6 p-[1px] rounded-lg bg-gradient-to-r from-white/10 via-transparent to-white/10 mb-6">
+      <div className="rounded-2xl bg-[rgba(30,33,40,0.5)] p-4 space-y-4 min-h-[121px]">
+        
         {/* Top Row */}
         <div className="flex flex-wrap items-center gap-3">
+          
           {/* Platform */}
           <div className="relative" ref={platformRef}>
             <button
@@ -81,18 +84,20 @@ export const FiltersBar: React.FC<Props> = ({
                 setOpenLanguage(false);
                 setOpenDate(false);
               }}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm text-gray-300"
+              className="flex w-[155px] h-[38px] px-[13px] pr-[10px] py-[9px] items-center gap-2 rounded-lg border border-white/10 bg-[rgba(17,19,24,1)] text-sm text-gray-300"
             >
               <LayoutGrid size={16} />
               {platform}
               <ChevronDown
                 size={16}
-                className={openPlatform ? "rotate-180" : ""}
+                className={`ml-auto transition-transform ${
+                  openPlatform ? "rotate-180" : ""
+                }`}
               />
             </button>
 
             {openPlatform && (
-              <div className="absolute mt-2 w-44 rounded-xl border border-white/10 bg-[#0B1220] z-50">
+              <div className="absolute w-[155px] rounded-xl border border-white/10 bg-[rgba(17,19,24,1)] z-50">
                 {platforms.map((item) => (
                   <div
                     key={item}
@@ -100,7 +105,7 @@ export const FiltersBar: React.FC<Props> = ({
                       updateFilter("platform", item);
                       setOpenPlatform(false);
                     }}
-                    className="px-4 py-3 text-sm cursor-pointer text-gray-300 hover:bg-white/5"
+                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(13,148,136,1)] hover:rounded-md"
                   >
                     {item}
                   </div>
@@ -110,11 +115,11 @@ export const FiltersBar: React.FC<Props> = ({
           </div>
 
           {/* Rating */}
-          <div className="flex items-center gap-2 border border-gray-700 rounded-lg px-2 py-1">
+          <div className="flex border border-gray-700 bg-[rgba(17,19,24,1)] rounded-lg w-[395px] h-[38px] overflow-hidden p-[4.5px]">
             <button
               onClick={() => updateFilter("rating", null)}
-              className={`px-3 py-1 text-sm rounded-md ${
-                rating === null ? "bg-teal-500 text-white" : "text-gray-300"
+              className={`h-[28px] w-[38px] flex justify-center items-center text-[12px] text-white rounded-md ${
+                rating === null ? "bg-teal-500" : "bg-transparent"
               }`}
             >
               All
@@ -124,25 +129,29 @@ export const FiltersBar: React.FC<Props> = ({
               <button
                 key={r}
                 onClick={() => updateFilter("rating", r)}
-                className={`px-3 py-1 rounded-md text-sm ${
-                  rating === r ? "bg-teal-500 text-white" : "text-yellow-400"
+                className={`flex items-center justify-center px-3 rounded-md ${
+                  rating === r ? "bg-teal-500 text-white" : "text-white"
                 }`}
               >
-                {"★".repeat(r)}
+                <span className="flex gap-[2px]">
+                  {Array.from({ length: r }).map((_, i) => (
+                    <span key={i} className="text-[10px]">
+                      ⭐
+                    </span>
+                  ))}
+                </span>
               </button>
             ))}
           </div>
 
           {/* Sentiment */}
-          <div className="flex border border-gray-700 rounded-lg overflow-hidden">
+          <div className="flex border border-gray-700 bg-[rgba(17,19,24,1)] rounded-lg h-[38px] overflow-hidden p-[4.5px]">
             {["All", "Positive", "Neutral", "Negative"].map((item) => (
               <button
                 key={item}
                 onClick={() => updateFilter("sentiment", item)}
-                className={`px-4 py-2 text-sm ${
-                  sentiment === item
-                    ? "bg-teal-500 text-white"
-                    : "text-gray-400 hover:bg-white/5"
+                className={`h-[28px] px-3 flex items-center justify-center text-[12px] text-white rounded-md ${
+                  sentiment === item ? "bg-teal-500" : "bg-transparent"
                 }`}
               >
                 {item}
@@ -158,15 +167,20 @@ export const FiltersBar: React.FC<Props> = ({
                 setOpenPlatform(false);
                 setOpenDate(false);
               }}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm text-gray-300"
+              className="flex w-[155px] h-[38px] px-[13px] pr-[10px] py-[9px] items-center gap-2 rounded-lg border border-white/10 bg-[rgba(17,19,24,1)] text-sm text-gray-300"
             >
-              <Globe size={16} />
+              <Globe size={14} className="pt=[13px]" />
               {language}
-              <ChevronDown size={16} />
+              <ChevronDown
+                size={16}
+                className={`ml-auto transition-transform ${
+                  openLanguage ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {openLanguage && (
-              <div className="absolute mt-2 w-44 rounded-xl border border-white/10 bg-[#0B1220] z-50">
+              <div className="absolute w-[155px] rounded-xl border border-white/10 bg-[rgba(17,19,24,1)] z-50">
                 {languages.map((item) => (
                   <div
                     key={item}
@@ -174,7 +188,7 @@ export const FiltersBar: React.FC<Props> = ({
                       updateFilter("language", item);
                       setOpenLanguage(false);
                     }}
-                    className="px-4 py-3 text-sm cursor-pointer text-gray-300 hover:bg-white/5"
+                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(13,148,136,1)] hover:rounded-md"
                   >
                     {item}
                   </div>
@@ -186,16 +200,15 @@ export const FiltersBar: React.FC<Props> = ({
 
         {/* Second Row */}
         <div className="flex flex-wrap items-center gap-3">
+          
           {/* Status */}
-          <div className="flex border border-gray-700 rounded-lg overflow-hidden">
+          <div className="flex border border-gray-700 bg-[rgba(17,19,24,1)] rounded-lg h-[38px] overflow-hidden p-[4.5px]">
             {["All", "Unanswered", "Answered", "Pending"].map((item) => (
               <button
                 key={item}
                 onClick={() => updateFilter("status", item)}
-                className={`px-4 py-2 text-sm ${
-                  status === item
-                    ? "bg-teal-500 text-white"
-                    : "text-gray-400 hover:bg-white/5"
+                className={`h-[28px] px-3 flex items-center justify-center text-[12px] text-white rounded-md ${
+                  status === item ? "bg-teal-500" : "bg-transparent"
                 }`}
               >
                 {item}
@@ -211,15 +224,20 @@ export const FiltersBar: React.FC<Props> = ({
                 setOpenPlatform(false);
                 setOpenLanguage(false);
               }}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-sm text-gray-300"
+              className="flex w-[155px] h-[38px] px-[13px] pr-[10px] py-[9px] items-center gap-2 rounded-lg border border-white/10 bg-[rgba(17,19,24,1)] text-sm text-gray-300"
             >
-              <Calendar size={16} />
+              <Calendar size={14} />
               {date}
-              <ChevronDown size={16} />
+              <ChevronDown
+                size={16}
+                className={`ml-auto transition-transform ${
+                  openDate ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
             {openDate && (
-              <div className="absolute mt-2 w-44 rounded-xl border border-white/10 bg-[#0B1220] z-50">
+              <div className="absolute w-[155px] rounded-xl border border-white/10 bg-[rgba(17,19,24,1)] z-50">
                 {dates.map((item) => (
                   <div
                     key={item}
@@ -227,7 +245,7 @@ export const FiltersBar: React.FC<Props> = ({
                       updateFilter("date", item);
                       setOpenDate(false);
                     }}
-                    className="px-4 py-3 text-sm cursor-pointer text-gray-300 hover:bg-white/5"
+                    className="flex h-[38px] px-[13px] py-[9px] items-center text-sm cursor-pointer text-gray-300 hover:bg-[rgba(13,148,136,1)] hover:rounded-md"
                   >
                     {item}
                   </div>
@@ -237,14 +255,14 @@ export const FiltersBar: React.FC<Props> = ({
           </div>
 
           {/* Search */}
-          <div className="flex items-center gap-2 flex-1 px-4 py-2 rounded-lg border border-gray-700 text-gray-400 min-w-[250px]">
+          <div className=" flex items-center gap-2 flex-1 px-4 py-2 rounded-lg border border-gray-700 text-gray-400 max-w-[528px] bg-[rgba(17,19,24,1)]">
             <Search size={16} />
             <input
               type="text"
               placeholder="Search by keyword, guest name"
               value={search}
               onChange={(e) => updateFilter("search", e.target.value)}
-              className="bg-transparent outline-none w-full text-sm"
+              className="bg-transparent outline-none w-full text-[12px] pl-[9px]"
             />
             {search && (
               <button onClick={() => updateFilter("search", "")}>
@@ -253,40 +271,37 @@ export const FiltersBar: React.FC<Props> = ({
             )}
           </div>
         </div>
-
         {/* Filter Chips */}
-        <div className="flex items-center gap-3 pt-2 border-t border-white/5 flex-wrap">
-          {chipConfig.map((chip) => {
-            if (chip.value === chip.defaultValue || !chip.value) return null;
+        {chipConfig.some(
+          (chip) => chip.value !== chip.defaultValue && chip.value,
+        ) && (
+          <div className="flex items-center gap-3 pt-3 border-t border-white/5 flex-wrap">
+            {chipConfig.map((chip) => {
+              if (chip.value === chip.defaultValue || !chip.value) return null;
 
-            return (
-              <div
-                key={chip.key}
-                className="flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-sm border border-teal-500/20"
-              >
-                {chip.label || chip.value}
-                <button
-                  onClick={() =>
-                    updateFilter(chip.key, chip.defaultValue)
-                  }
+              return (
+                <div
+                  key={chip.key}
+                  className="flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-[12px] border border-teal-500/20"
                 >
-                  <X size={12} />
-                </button>
-              </div>
-            );
-          })}
+                  {chip.label || chip.value}
+                  <button
+                    onClick={() => updateFilter(chip.key, chip.defaultValue)}
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+              );
+            })}
 
-          {chipConfig.some(
-            (chip) => chip.value !== chip.defaultValue && chip.value
-          ) && (
             <button
               onClick={clearAll}
-              className="text-gray-400 text-sm hover:text-white transition"
+              className="text-gray-400 text-[12px] hover:text-white transition"
             >
               Clear All Filters
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

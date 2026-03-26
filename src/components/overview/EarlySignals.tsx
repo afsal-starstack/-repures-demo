@@ -27,112 +27,88 @@ const signals = [
 ];
 
 // ------------------
-// Card Component
-// ------------------
-const SignalCard = ({ item }: any) => {
-  const isWarning = item.type === "warning";
-
-  return (
-    <div
-      className={`
-        group relative rounded-xl p-5 border transition-all duration-300
-        ${
-          isWarning
-            ? "border-yellow-500/30 hover:border-yellow-500 bg-gradient-to-r from-yellow-500/10 to-transparent"
-            : "border-blue-500/20 hover:border-blue-500 bg-gradient-to-r from-blue-500/10 to-transparent"
-        }
-      `}
-    >
-      {/* Top Right Time */}
-      <span className="absolute top-4 right-4 text-xs text-gray-500">
-        {item.time}
-      </span>
-
-      {/* Content */}
-      <div className="flex items-start gap-4">
-        {/* Icon */}
-        <div
-          className={`
-            w-10 h-10 flex items-center justify-center rounded-lg
-            ${
-              isWarning
-                ? "bg-yellow-500/10 text-yellow-400"
-                : "bg-blue-500/10 text-blue-400"
-            }
-          `}
-        >
-          {isWarning ? <AlertTriangle size={18} /> : <Info size={18} />}
-        </div>
-
-        {/* Text */}
-        <div className="flex-1">
-          {/* Badge */}
-          <span
-            className={`
-              text-xs px-2 py-1 rounded-full border
-              ${
-                isWarning
-                  ? "border-yellow-500/40 text-yellow-400"
-                  : "border-blue-500/40 text-blue-400"
-              }
-            `}
-          >
-            {isWarning ? "Warning" : "Info"}
-          </span>
-
-          {/* Message */}
-          <p className="text-sm text-gray-200 mt-2 leading-relaxed">
-            {item.text}
-          </p>
-
-          {/* Action */}
-          <div className="flex items-center gap-1 text-teal-400 text-sm mt-3 cursor-pointer">
-            Review <ArrowRight size={14} />
-          </div>
-        </div>
-      </div>
-
-      {/* Hover Glow Effect */}
-      <div
-        className={`
-          absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition
-          ${
-            isWarning
-              ? "bg-gradient-to-r from-yellow-500/20 to-transparent"
-              : "bg-gradient-to-r from-blue-500/20 to-transparent"
-          }
-        `}
-      />
-    </div>
-  );
-};
-
-// ------------------
 // Main Component
 // ------------------
 export default function EarlySignals() {
   return (
-    <div className="rounded-2xl border border-white/10 p-6 bg-[rgba(13,16,23,0.30)] backdrop-blur-xl">
+    <div className="rounded-2xl border border-white/10 p-6 bg-[rgba(13,16,23,0.3)] backdrop-blur-xl h-[349.5px]">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-white text-lg font-semibold">
+          <h2 className="text-white font-roboto text-[18px] font-[600] leading-[28px]">
             Early Signals
           </h2>
-          <p className="text-gray-400 text-sm">
+          <p className="text-[#6B7280] font-roboto text-[12px] font-normal leading-[16px]">
             AI-detected patterns from the last 72 hours
           </p>
         </div>
 
-        <span className="text-gray-500 text-sm">4 signals</span>
+        <span className="text-[rgba(75,85,99,1)] font-inter text-[12px] font-normal leading-[16px]">
+          {signals.length} signals
+        </span>
       </div>
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {signals.map((item, index) => (
-          <SignalCard key={index} item={item} />
-        ))}
+        {signals.map((item, index) => {
+          const isWarning = item.type === "warning";
+
+          return (
+<div
+  key={index}
+  className={`
+    relative rounded-xl p-[17px] border h-[111px] gap-4
+    ${isWarning ? "border-yellow-500/40 bg-[rgba(245,158,11,0.05)] hover:bg-[rgba(245,158,11,0.15)]"
+                : "border-blue-500/40 bg-[rgba(59,130,246,0.05)] hover:bg-[rgba(59,130,246,0.15)]"}
+    transition-colors duration-200 ease-in-out
+  `}
+>
+              {/* Top Right Time */}
+              <span className="absolute top-4 right-4 text-xs text-gray-500">
+                {item.time}
+              </span>
+
+              {/* Content */}
+              <div className="flex items-start gap-4">
+                {/* Icon */}
+                <div
+                  className={`
+                    w-10 h-10 flex items-center justify-center rounded-lg
+                    ${isWarning ? "bg-yellow-500/10 text-yellow-400" : "bg-blue-500/10 text-blue-400"}
+                  `}
+                >
+                  {isWarning ? <AlertTriangle size={18} /> : <Info size={18} />}
+                </div>
+
+                {/* Text */}
+                <div className="flex-1">
+                  {/* Badge */}
+                  <span
+                    className={`
+                      text-[12px] font-roboto font-semibold leading-[16px] px-2 py-1 rounded-full border
+                      ${isWarning 
+                        ? "border-yellow-500 text-[rgba(251,191,36,1)]" 
+                        : "border-blue-400 text-[rgba(96,165,250,1)]"}
+                    `}
+                  >
+                    {isWarning ? "Warning" : "Info"}
+                  </span>
+
+                  {/* Message */}
+                  <p className="text-[rgba(229,231,235,1)] font-roboto text-[14px] font-normal leading-[22.75px] mt-2">
+                    {item.text}
+                  </p>
+
+                  {/* Action */}
+                  <div className="flex items-center gap-1 text-[#2DD4BF] text-[12px] font-roboto font-semibold leading-[16px] mt-1 cursor-pointer text-center">
+                    Review <ArrowRight size={14} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
