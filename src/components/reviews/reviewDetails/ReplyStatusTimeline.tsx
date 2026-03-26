@@ -1,4 +1,3 @@
-import React from "react";
 
 type Status = "completed" | "pending";
 
@@ -104,9 +103,8 @@ export default function ReplyStatusTimeline({
               <StatusDot status={item.status} />
               <div className="flex flex-col gap-0.5">
                 <span
-                  className={`text-white font-roboto text-[9.828px] font-medium leading-[13.105px] ${
-                    item.status === "completed" ? "" : "text-gray-500"
-                  }`}
+                  className={`text-white font-roboto text-[9.828px] font-medium leading-[13.105px] ${item.status === "completed" ? "" : "text-gray-500"
+                    }`}
                 >
                   {item.title}
                 </span>

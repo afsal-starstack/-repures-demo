@@ -41,22 +41,23 @@ export default function TranslationAnalysis({ review }: any) {
   };
 
   // Map sentiment to all AI tag values dynamically
-const aiTags = (() => {
-  const sentiment = review.sentiment?.toLowerCase() || "neutral";
+  const aiTags = (() => {
+    const sentiment = review.sentiment?.toLowerCase() || "neutral";
 
-  switch (sentiment) {
-    case "positive":
-      return { tone: "Pleased", intent: "Recommending", risk: "Low", sentimentLabel: "Positive" };
-    case "negative":
-      return { tone: "Angry", intent: "Warning others", risk: "High", sentimentLabel: "Negative" };
-    case "neutral":
-    default:
-      return { tone: "Medium", intent: "Warning others", risk: "Medium", sentimentLabel: "Neutral" };
-  }
-})();
+    switch (sentiment) {
+      case "positive":
+        return { tone: "Pleased", intent: "Recommending", risk: "Low", sentimentLabel: "Positive" };
+      case "negative":
+        return { tone: "Angry", intent: "Warning others", risk: "High", sentimentLabel: "Negative" };
+      case "neutral":
+      default:
+        return { tone: "Medium", intent: "Warning others", risk: "Medium", sentimentLabel: "Neutral" };
+    }
+  })();
 
   // Determine risk class based on sentiment
   const getRiskClass = (risk: string) => {
+    console.log("risk - build error", risk);
     switch (aiTags.sentimentLabel.toLowerCase()) {
       case "positive":
         return "bg-green-500/20 text-green-400";
@@ -107,9 +108,8 @@ const aiTags = (() => {
 
           <p
             dir={review.language === "Arabic" ? "rtl" : "ltr"}
-            className={`overflow-hidden break-words font-roboto text-[11.467px] font-normal leading-[18.633px] text-[#CBD5E1] mt-4 ${
-              review.language === "Arabic" ? "text-right" : "text-left"
-            }`}
+            className={`overflow-hidden break-words font-roboto text-[11.467px] font-normal leading-[18.633px] text-[#CBD5E1] mt-4 ${review.language === "Arabic" ? "text-right" : "text-left"
+              }`}
           >
             {review.text}
           </p>
