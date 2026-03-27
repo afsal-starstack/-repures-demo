@@ -30,29 +30,25 @@ export const ReviewDetails = ({
   };
 
   return (
-    <div className="space-y-6 bg-[rgba(17,19,24,0.5)] p-5 rounded-md border border-white/10">
+    /* Full width on all screens, left border on desktop to separate from list */
+    <div className="space-y-4 sm:space-y-6 bg-[rgba(17,19,24,0.5)] p-4 sm:p-5 rounded-md border border-white/10">
       <ReviewMain
         review={review}
         viewIndex={viewIndex}
         setViewIndex={setViewIndex}
         totalReviews={totalReviews}
       />
-
       <TranslationAnalysis review={review} />
-
       <GuestMeaning sentiment={review.sentiment} />
-
       <AIReplyGenerator
         review={review}
         showAIReply={showAIReply}
         setShowAIReply={setShowAIReply}
         generateSectionRef={generateSectionRef}
       />
-
       {showAIReply && (
         <AIReplyMeaning copied={copied} handleCopyEnglish={handleCopyEnglish} />
       )}
-
       {showAIReply && (
         <EditSendReply
           review={review}
@@ -61,9 +57,7 @@ export const ReviewDetails = ({
           languages={languages}
         />
       )}
-
       <ReplyStatusTimeline status={review.status} />
-
       <ReplyHistory />
     </div>
   );

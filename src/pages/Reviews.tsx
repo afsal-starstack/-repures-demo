@@ -5,7 +5,6 @@ import { FiltersBar } from "@/components/reviews/FilterBar";
 import { ReviewList } from "@/components/reviews/ReviewList";
 import { ReviewDetails } from "@/components/reviews/ReviewDetails";
 
-// Default filters
 const defaultFilters = {
   platform: "Platform",
   rating: null as number | null,
@@ -16,11 +15,10 @@ const defaultFilters = {
   search: "",
 };
 
-// Sample reviews
 const reviewsData = [
   {
     id: 1,
-    name: "Ahmed Al Mansouri",
+    name: "Ahmed Al Mansouri ",
     platform: "Booking.com",
     rating: 2,
     time: "5 hours ago",
@@ -93,30 +91,27 @@ const Reviews = () => {
   const [selectedReviewIndex, setSelectedReviewIndex] = useState(0);
   const [filters, setFilters] = useState(defaultFilters);
   const [showAIReply, setShowAIReply] = useState(false);
+  // On mobile/tablet, show detail panel when a review is selected
+  const [showDetail, setShowDetail] = useState(false);
 
   const updateFilter = (key: string, value: any) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
   const clearAll = () => setFilters(defaultFilters);
 
-  // Filter & sort
   const filteredReviews = useMemo(() => {
     const today = new Date().getTime();
-
     let result = reviewsData.filter((review) => {
       const searchText = filters.search.toLowerCase();
       const matchesSearch = Object.values(review)
         .join(" ")
         .toLowerCase()
         .includes(searchText);
-
-      // Date filter
       const diffDays = (today - review.timestamp) / (1000 * 3600 * 24);
       let matchesDate = true;
       if (filters.date === "Last 7 days") matchesDate = diffDays <= 7;
       if (filters.date === "Last 30 days") matchesDate = diffDays <= 30;
       if (filters.date === "Last 1 year") matchesDate = diffDays <= 365;
-
       return (
         matchesSearch &&
         (filters.platform === "Platform" || review.platform === filters.platform) &&
@@ -128,7 +123,6 @@ const Reviews = () => {
       );
     });
 
-    // Sort
     result.sort((a, b) => {
       if (sort === "Newest") return b.timestamp - a.timestamp;
       if (sort === "Positive Reviews") return b.rating - a.rating;
@@ -143,43 +137,60 @@ const Reviews = () => {
     if (sort === "Needs Response") {
       result = result.filter((r) => r.status === "Unanswered");
     }
-
     return result;
   }, [filters, sort]);
 
   useEffect(() => {
     setSelectedReviewIndex(0);
-    setShowAIReply(false); // reset AI reply on filter/sort change
+    setShowAIReply(false);
+    setShowDetail(false);
   }, [filters, sort]);
 
   const selectedReview =
     filteredReviews.length > 0 ? filteredReviews[selectedReviewIndex] : null;
 
   return (
-    <div className="mt-[115px]">
+    <div className="lg:mt-[115px]">
       <ReviewsHeader />
       <PlatformCards />
       <FiltersBar filters={filters} updateFilter={updateFilter} clearAll={clearAll} />
 
-      <div className="grid grid-cols-12 gap-0">
-        <div className="col-span-5">
+      {/* DESKTOP: side by side | MOBILE/TABLET: stacked with back button */}
+      <div className="block lg:grid lg:grid-cols-12 lg:gap-0">
+
+        {/* ReviewList — hidden on mobile when detail is open */}
+        <div className={`lg:col-span-5 ${showDetail ? "hidden lg:block" : "block"}`}>
           <ReviewList
             reviews={filteredReviews}
             selected={selectedReviewIndex}
             onSelect={(index: number) => {
               setSelectedReviewIndex(index);
-              setShowAIReply(false); // <-- important: close AI reply
+              setShowAIReply(false);
+              setShowDetail(true);
             }}
             sort={sort}
             setSort={setSort}
+            setShowAIReply={setShowAIReply}
           />
         </div>
 
-        <div className="col-span-7">
+        {/* ReviewDetails — hidden on mobile when list is shown */}
+        <div className={`lg:col-span-7 ${showDetail ? "block" : "hidden lg:block"}`}>
+          {/* Back button — mobile/tablet only */}
+          <button
+            onClick={() => setShowDetail(false)}
+            className="lg:hidden flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-3 transition-colors"
+          >
+            ← Back to Reviews
+          </button>
+
           <ReviewDetails
             review={selectedReview}
             viewIndex={selectedReviewIndex}
-            setViewIndex={setSelectedReviewIndex}
+            setViewIndex={(index: number) => {
+              setSelectedReviewIndex(index);
+              setShowAIReply(false);
+            }}
             totalReviews={filteredReviews.length}
             showAIReply={showAIReply}
             setShowAIReply={setShowAIReply}

@@ -1,14 +1,7 @@
 import { useState } from "react";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  CartesianGrid,
+  LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  BarChart, Bar, CartesianGrid,
 } from "recharts";
 import { LineChart as LineIcon, Smile, BarChart3 } from "lucide-react";
 
@@ -36,241 +29,93 @@ const volumeData = [
 const tooltipBoxStyle = {
   backgroundColor: "#111827",
   border: "1px solid #1F2937",
-  borderRadius: "8px",
-  width: 100,
-  height: 60,
-  padding: "10px",
+  borderRadius: "6px",
+  width: 90,
+  height: 50,
+  padding: "6px",
   overflow: "hidden",
 };
 
-const labelTextStyle = {
-  color: "#9CA3AF",
-  fontSize: "12px",
-  whiteSpace: "nowrap",
-};
+const labelTextStyle = { color: "#9CA3AF", fontSize: "11px", whiteSpace: "nowrap" as const };
+const valueTextStyle = { color: "#14B8A6", fontSize: "11px", whiteSpace: "nowrap" as const };
+const yAxisLabelStyle = { fill: "#9CA3AF", fontFamily: "Inter", fontSize: 11, fontWeight: 700 };
+const yAxisTickStyle = { fill: "#6B7280", fontFamily: "Inter", fontSize: 11, fontWeight: 400 };
+const xAxisTickStyle = { fill: "#6B7280", fontFamily: "Inter", fontSize: 11, fontWeight: 400 };
+const tickLineStyle = { stroke: "#6B7280", strokeWidth: 1 };
 
-const valueTextStyle = {
-  color: "#14B8A6",
-  fontSize: "12px",
-  whiteSpace: "nowrap",
-};
+const tabs = [
+  { key: "reputation", label: "Reputation", icon: LineIcon },
+  { key: "sentiment", label: "Sentiment", icon: Smile },
+  { key: "volume", label: "Volume", icon: BarChart3 },
+];
 
 export default function ReputationPulse() {
   const [active, setActive] = useState("reputation");
 
-  const yAxisLabelStyle = {
-    fill: "#9CA3AF",
-    fontFamily: "Inter",
-    fontSize: 12,
-    fontWeight: 700,
-    fontStyle: "normal",
-    lineHeight: "normal",
-  };
-
-  const yAxisTickStyle = {
-    fill: "#6B7280",
-    fontFamily: "Inter",
-    fontSize: 12,
-    fontWeight: 400,
-    fontStyle: "normal",
-    lineHeight: "normal",
-  };
-
-  const xAxisTickStyle = {
-    fill: "#6B7280",
-    fontFamily: "Inter",
-    fontSize: 12,
-    fontWeight: 400,
-    fontStyle: "normal",
-    lineHeight: "normal",
-  };
-
-  const tickLineStyle = { stroke: "#6B7280", strokeWidth: 1 };
-
   return (
-    <div className="rounded-2xl border border-[#1F2937] bg-[rgba(19, 22, 28, 0.3)] p-6 h-[450px]">
+    <div className="rounded-xl border border-[#1F2937] bg-[rgba(19,22,28,0.3)] p-3 sm:p-4">
+
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-5">
         <div>
-          <h3 className="text-[#FFFFFF] font-roboto text-[18px] font-semibold leading-[28px]">
+          <h3 className="text-white font-roboto text-[16px] sm:text-[18px] font-semibold leading-[24px] sm:leading-[28px]">
             Reputation Pulse
           </h3>
-          <p className="text-[#6B7280] font-roboto text-[12px] font-normal leading-[16px] mt-1">
-            Last 30 days · Updated 18 hours ago
+          <p className="text-[#6B7280] text-[10px] sm:text-[12px] mt-1">
+            Last 30 days · Updated 18h ago
           </p>
         </div>
 
         {/* TABS */}
-        <div className="flex items-center w-[527.359px] h-[56px] p-[5px] gap-[4px] flex-shrink-0 rounded-[12px] bg-[#0A0D12] border border-[#1F2937]">
-          <button
-            onClick={() => setActive("reputation")}
-            className={`flex items-center w-[170px] h-[46px] px-[21px] py-[11px] gap-[8px] flex-shrink-0 rounded-[8px] shadow-sm text-[13px] border ${
-              active === "reputation"
-                ? "border-[rgba(20,184,166,0.4)] bg-[rgba(20,184,166,0.2)] text-teal-400"
-                : "border-transparent bg-transparent text-[#6B7280]"
-            }`}
-          >
-            <LineIcon className="w-4 h-4" />
-            Reputation Score
-          </button>
-
-          <button
-            onClick={() => setActive("sentiment")}
-            className={`flex items-center w-[163px] h-[46px] px-[21px] py-[11px] gap-[8px] flex-shrink-0 rounded-[8px] shadow-sm text-[13px] border ${
-              active === "sentiment"
-                ? "border-[rgba(20,184,166,0.4)] bg-[rgba(20,184,166,0.2)] text-indigo-400"
-                : "border-transparent bg-transparent text-[#6B7280]"
-            }`}
-          >
-            <Smile className="w-4 h-4" />
-            Sentiment Trend
-          </button>
-
-          <button
-            onClick={() => setActive("volume")}
-            className={`flex items-center w-[175.188px] h-[46px] px-[21px] py-[11px] gap-[8px] flex-shrink-0 rounded-[8px] shadow-sm text-[13px] border ${
-              active === "volume"
-                ? "border-[rgba(20,184,166,0.4)] bg-[rgba(20,184,166,0.2)] text-teal-400"
-                : "border-transparent bg-transparent text-[#6B7280]"
-            }`}
-          >
-            <BarChart3 className="w-4 h-4" />
-            Review Volume
-          </button>
+        <div className="flex flex-wrap items-center gap-1 p-[4px] rounded-lg bg-[#0A0D12] border border-[#1F2937] w-full sm:w-auto">
+          {tabs.map(({ key, label, icon: Icon }) => (
+            <button
+              key={key}
+              onClick={() => setActive(key)}
+              className={`flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-2 rounded-[6px] text-[11px] sm:text-[13px] border flex-1 sm:flex-none justify-center sm:justify-start
+                ${active === key
+                  ? "border-[rgba(20,184,166,0.4)] bg-[rgba(20,184,166,0.2)] text-teal-400"
+                  : "border-transparent bg-transparent text-[#6B7280]"
+                }`}
+            >
+              <Icon className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="hidden sm:inline">{label}</span>
+            </button>
+          ))}
         </div>
       </div>
 
       {/* CHART */}
-      <div className="h-[320px]">
+      <div className="h-[200px] sm:h-[260px]">
         <ResponsiveContainer width="100%" height="100%">
-          {/* REPUTATION */}
-          {active === "reputation" && (
+          {active === "reputation" ? (
             <LineChart data={reputationData}>
-              <CartesianGrid
-                strokeDasharray="3 3"
-                strokeOpacity={0.3}
-                stroke="#374151"
-                vertical={false}
-              />
-              <XAxis
-                dataKey="week"
-                stroke="#6B7280"
-                tick={xAxisTickStyle}
-                tickLine={tickLineStyle}
-                tickSize={6}
-              />
-              <YAxis
-                stroke="#6B7280"
-                tick={yAxisTickStyle}
-                tickLine={tickLineStyle}
-                tickSize={6}
-                label={{
-                  value: "Score",
-                  angle: -90,
-                  position: "insideLeft",
-                  offset: 10,
-                  style: yAxisLabelStyle,
-                }}
-              />
-              <Tooltip
-                contentStyle={tooltipBoxStyle}
-                cursor={{ stroke: "#1F2937" }}
-                labelStyle={labelTextStyle}
-                itemStyle={valueTextStyle}
-              />
-              <Line
-                type="monotone"
-                dataKey="score"
-                stroke="#14B8A6"
-                strokeWidth={3}
-                dot={{ r: 4, fill: "#14B8A6", stroke: "#14B8A6" }}
-                activeDot={{ r: 5, fill: "#14B8A6", stroke: "#14B8A6" }}
-              />
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} stroke="#374151" vertical={false} />
+              <XAxis dataKey="week" stroke="#6B7280" tick={xAxisTickStyle} tickLine={tickLineStyle} tickSize={5} />
+              <YAxis stroke="#6B7280" tick={yAxisTickStyle} tickLine={tickLineStyle} tickSize={5}
+                label={{ value: "Score", angle: -90, position: "insideLeft", offset: 8, style: yAxisLabelStyle }} />
+              <Tooltip contentStyle={tooltipBoxStyle} cursor={{ stroke: "#1F2937" }} labelStyle={labelTextStyle} itemStyle={valueTextStyle} />
+              <Line type="monotone" dataKey="score" stroke="#14B8A6" strokeWidth={2}
+                dot={{ r: 3, fill: "#14B8A6", stroke: "#14B8A6" }} activeDot={{ r: 4, fill: "#14B8A6", stroke: "#14B8A6" }} />
             </LineChart>
-          )}
-
-          {/* SENTIMENT */}
-          {active === "sentiment" && (
+          ) : active === "sentiment" ? (
             <LineChart data={sentimentData}>
-              <CartesianGrid
-                strokeDasharray="3 3"
-                strokeOpacity={0.3}
-                stroke="#374151"
-                vertical={false}
-              />
-              <XAxis
-                dataKey="week"
-                stroke="#6B7280"
-                tick={xAxisTickStyle}
-                tickLine={tickLineStyle}
-                tickSize={6}
-              />
-              <YAxis
-                stroke="#6B7280"
-                tick={yAxisTickStyle}
-                tickLine={tickLineStyle}
-                tickSize={6}
-                label={{
-                  value: "Positive",
-                  angle: -90,
-                  position: "insideLeft",
-                  offset: 10,
-                  style: yAxisLabelStyle,
-                }}
-              />
-              <Tooltip
-                contentStyle={tooltipBoxStyle}
-                cursor={{ stroke: "#1F2937" }}
-                labelStyle={labelTextStyle}
-                itemStyle={valueTextStyle}
-              />
-              <Line
-                type="monotone"
-                dataKey="sentiment"
-                stroke="#6366F1"
-                strokeWidth={3}
-                dot={{ r: 4, fill: "#6366F1", stroke: "#6366F1" }}
-                activeDot={{ r: 5, fill: "#6366F1", stroke: "#6366F1" }}
-              />
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} stroke="#374151" vertical={false} />
+              <XAxis dataKey="week" stroke="#6B7280" tick={xAxisTickStyle} tickLine={tickLineStyle} tickSize={5} />
+              <YAxis stroke="#6B7280" tick={yAxisTickStyle} tickLine={tickLineStyle} tickSize={5}
+                label={{ value: "Positive", angle: -90, position: "insideLeft", offset: 8, style: yAxisLabelStyle }} />
+              <Tooltip contentStyle={tooltipBoxStyle} cursor={{ stroke: "#1F2937" }} labelStyle={labelTextStyle} itemStyle={valueTextStyle} />
+              <Line type="monotone" dataKey="sentiment" stroke="#6366F1" strokeWidth={2}
+                dot={{ r: 3, fill: "#6366F1", stroke: "#6366F1" }} activeDot={{ r: 4, fill: "#6366F1", stroke: "#6366F1" }} />
             </LineChart>
-          )}
-
-          {/* VOLUME */}
-          {active === "volume" && (
+          ) : (
             <BarChart data={volumeData}>
-              <CartesianGrid
-                strokeDasharray="3 3"
-                strokeOpacity={0.3}
-                stroke="#374151"
-                vertical={false}
-              />
-              <XAxis
-                dataKey="week"
-                stroke="#6B7280"
-                tick={xAxisTickStyle}
-                tickLine={tickLineStyle}
-                tickSize={6}
-              />
-              <YAxis
-                stroke="#6B7280"
-                tick={yAxisTickStyle}
-                tickLine={tickLineStyle}
-                tickSize={6}
-                label={{
-                  value: "Reviews",
-                  angle: -90,
-                  position: "insideLeft",
-                  offset: 10,
-                  style: yAxisLabelStyle,
-                }}
-              />
-              <Tooltip
-                contentStyle={tooltipBoxStyle}
-                cursor={{ fill: "transparent" }}
-                labelStyle={labelTextStyle}
-                itemStyle={valueTextStyle}
-              />
-              <Bar dataKey="volume" fill="#10B981" radius={[6, 6, 0, 0]} />
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} stroke="#374151" vertical={false} />
+              <XAxis dataKey="week" stroke="#6B7280" tick={xAxisTickStyle} tickLine={tickLineStyle} tickSize={5} />
+              <YAxis stroke="#6B7280" tick={yAxisTickStyle} tickLine={tickLineStyle} tickSize={5}
+                label={{ value: "Reviews", angle: -90, position: "insideLeft", offset: 8, style: yAxisLabelStyle }} />
+              <Tooltip contentStyle={tooltipBoxStyle} cursor={{ fill: "transparent" }} labelStyle={labelTextStyle} itemStyle={valueTextStyle} />
+              <Bar dataKey="volume" fill="#10B981" radius={[4, 4, 0, 0]} />
             </BarChart>
           )}
         </ResponsiveContainer>

@@ -70,7 +70,7 @@ export const FiltersBar: React.FC<Props> = ({
   ];
 
   return (
-    <div className="mt-6 p-[1px] rounded-lg bg-gradient-to-r from-white/10 via-transparent to-white/10 mb-6">
+    <div className="mt-6 p-[1px] rounded-lg bg-gradient-to-r from-white/10 via-transparent to-white/10 mb-6 border border-white/10">
       <div className="rounded-2xl bg-[rgba(30,33,40,0.5)] p-4 space-y-4 min-h-[121px]">
         
         {/* Top Row */}
