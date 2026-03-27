@@ -11,12 +11,13 @@ export default function GuestMeaning({ sentiment = "Neutral" }: GuestMeaningProp
   };
 
   // Determine card background color based on sentiment
-  const getBg = () => {
-    // if (sentiment === "Positive") return "bg-gradient-to-br from-green-600 to-green-800";
-    // if (sentiment === "Negative") return "bg-gradient-to-br from-red-600 to-red-800";
-    return "bg-[linear-gradient(135deg,_#1E1B4B_0%,_#1A1838_100%)]"; // Neutral
-  };
-
+ const getBg = () => {
+  if (sentiment === "Positive")
+    return "bg-[rgba(13,40,24,1)] border border-[rgba(37,194,97,0.3)]";
+  // if (sentiment === "Negative")
+  //   return "bg-gradient-to-br from-red-600 to-red-800 border-red-500";
+  return "bg-[linear-gradient(135deg,_#1E1B4B_0%,_#1A1838_100%)] border border-[rgba(139,92,246,0.3)]"; // Neutral
+};
   const icon = getIcon();
   const bgClass = getBg();
 

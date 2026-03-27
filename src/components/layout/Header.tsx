@@ -29,7 +29,7 @@ export default function Header() {
   const data = dummyData;
 
   return (
-    <div className="fixed top-0 left-[260px] z-40 flex items-center justify-between w-[calc(100%-260px)] h-[115px] pl-8 pt-4 pb-[17px] border-b border-[#1F2937] bg-[#13161C]">
+    <div className="fixed top-0 left-[255px] z-40 flex items-center justify-between w-[calc(100%-260px)] h-[115px] pl-8 pt-4 pb-[17px] border-b border-[#1F2937] bg-[#13161C]">
       {/* LEFT */}
       <div className="flex flex-col">
       <h2 className="text-white font-roboto text-[20px] font-bold leading-[28px]">
