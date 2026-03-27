@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { Outlet } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu} from "lucide-react";
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
