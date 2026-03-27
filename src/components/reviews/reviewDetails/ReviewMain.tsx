@@ -57,14 +57,28 @@ export default function ReviewMain({
 
         {/* Status / Urgent */}
         <div className="flex gap-2">
-          {review.status === "Unanswered" && (
-            <div className="gap-[1px] flex items-center flex-shrink-0 rounded-[8189.576px] border-[0.819px] border-[rgba(239,68,68,0.3)] bg-[rgba(239,68,68,0.2)] px-[10.648px]">
-              <span className="text-[9.828px] pb-[3px]">⚠</span>
-              <span className="text-[9.828px] font-roboto font-medium leading-[13.105px] text-[#F87171]">
-                Not Replied
-              </span>
-            </div>
-          )}
+      {review.status === "Unanswered" ? (
+  <div className="flex items-center gap-[1px] flex-shrink-0 rounded-full border-[0.819px] border-[rgba(239,68,68,0.3)] bg-[rgba(239,68,68,0.2)] px-[10.648px] h-[21.295px]">
+    <span className="text-[9.828px] pb-[3px]">⚠</span>
+    <span className="text-[9.828px] font-roboto font-medium leading-[13.105px] text-[#F87171]">
+      Not Replied
+    </span>
+  </div>
+) : review.status === "Answered" ? (
+  <div className="flex items-center gap-[1px] flex-shrink-0 rounded-full bg-[rgba(45,212,191,0.2)] px-[10.648px] h-[21.295px]">
+    <span className="text-[9.828px] pb-[3px]">✓</span>
+    <span className="text-[9.828px] font-roboto font-normal leading-[13.105px] text-[#2DD4BF]">
+      Replied
+    </span>
+  </div>
+) : review.status === "Draft" ? (
+  <div className="flex items-center gap-[1px] flex-shrink-0 rounded-full border-[0.819px] border-[rgba(250,204,21,0.3)] bg-[rgba(250,204,21,0.2)] px-[10.648px] h-[21.295px] w-[84.655px]">
+    <span className="text-[9.828px] pb-[3px]">💾</span>
+    <span className="text-[9.828px] font-roboto font-normal leading-[13.105px] text-[#FACC15]">
+      Save Draft
+    </span>
+  </div>
+) : null}
           {review.urgent && (
             <span className="px-3 py-1 rounded-full bg-[#EF4444] border border-red-500/30 text-white font-roboto text-[10px] font-medium leading-[13.105px]">
               🔴 Urgent
