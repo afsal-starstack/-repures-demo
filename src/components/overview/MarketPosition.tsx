@@ -74,7 +74,7 @@ export default function MarketPosition() {
               <div
                 key={hotel.rank}
                 className={`p-3 rounded-xl border h-auto ${
-                  hotel.highlight ? "border-none bg-emerald-500/5" : "border-none bg-white/5"
+                  hotel.highlight ? "border-[rgba(20,184,166,0.3)] bg-emerald-500/5" : "border-none bg-white/5"
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">

@@ -55,7 +55,9 @@ export default function Header() {
 
           <div className="flex items-center text-gray-500">
             <div className="w-1 h-1 rounded-full bg-[#374151] mr-[12px] ml-[12px]"></div>
-            <span>Ranked #{data.rank} locally</span>
+            <span>Ranked <span className="text-white font-roboto text-[12px] font-semibold leading-[16px]">
+  #{data.rank}
+</span> locally</span>
           </div>
 
         </div>
