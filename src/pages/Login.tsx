@@ -8,10 +8,6 @@ import emailIcon from "@/assets/icons/loginPage/email.svg";
 import passwordEye from "@/assets/icons/loginPage/eye.svg";
 import passwordLock from "@/assets/icons/loginPage/lock.svg";
 
-// interface LoginProps {
-//   className?: string;
-// }
-
 export default function Login() {
   // State
   // -----------------------------
@@ -37,9 +33,7 @@ export default function Login() {
   // Dummy Login
   // -----------------------------
   const handleLogin = () => {
-    // const dummyEmail = "repures@gmail.com";
-    // const dummyPassword = "123456";
-
+   
     const dummyEmail = "demouser@repures.com";
     const dummyPassword = "repuresdemo@123";
 
@@ -92,8 +86,6 @@ export default function Login() {
         >
           {/* Inner Glass */}
           <div className="p-[33px] sm:p-[33px] rounded-2xl min-h-[420px] sm:min-h-[480px] w-full bg-[#163C34] backdrop-blur-xl">
-            {/* <div className="p-[33px] sm:p-[33px] rounded-2xl min-h-[420px] sm:min-h-[480px] w-full bg-[#000000] backdrop-blur-xl"> */}
-
             {/* Heading */}
             <div className="pb-[18px]">
               <h2 className="text-[#FFF] text-[20px] leading-[28px] font-bold font-roboto">

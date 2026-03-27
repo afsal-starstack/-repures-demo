@@ -43,13 +43,7 @@ const actions = [
 ];
 
 const ArrowIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="15"
-    height="14"
-    viewBox="0 0 15 14"
-    fill="none"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
     <path
       d="M9.6329 5.48339L4.60636 10.5117L3.77832 9.68339L8.80486 4.65505H4.38477V3.48839H10.7991V9.90505H9.6329V5.48339Z"
       fill="#4B5563"
@@ -60,30 +54,22 @@ const ArrowIcon = () => (
 export default function QuickActions() {
   return (
     <div>
-      {/* Header */}
       <h2 className="text-white font-roboto text-[18px] font-semibold leading-[28px] mb-4">
         Quick Actions
       </h2>
-
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {actions.map((item, index) => (
           <div
             key={index}
-            className={`
-              relative flex flex-col items-start flex-shrink-0
-              w-[284px] h-[153px] p-[21px]
+            className={`relative flex flex-col items-start w-full p-4 sm:p-[21px]
               rounded-[12px] border ${item.border}
               bg-[rgba(19,22,28,0.3)]
               transition-colors duration-300 cursor-pointer
-              ${item.hover} hover:shadow-lg
-            `}
+              ${item.hover} hover:shadow-lg`}
           >
             {/* Icon + Arrow Row */}
             <div className="flex items-center justify-between w-full mb-4">
-              <div
-                className={`w-9 h-9 flex items-center justify-center rounded-lg ${item.bg}`}
-              >
+              <div className={`w-9 h-9 flex items-center justify-center rounded-lg ${item.bg}`}>
                 <img src={item.image} alt={item.title} className="w-5 h-5" />
               </div>
               <div className="pb-4">
@@ -97,9 +83,7 @@ export default function QuickActions() {
             </p>
 
             {/* Value */}
-            <p
-              className={`text-[30px] font-bold leading-[36px] font-inter ${item.color}`}
-            >
+            <p className={`text-[24px] sm:text-[30px] font-bold leading-[36px] font-inter ${item.color}`}>
               {item.value}
             </p>
           </div>
